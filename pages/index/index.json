@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "小盼日历",
+  "usingComponents": {
+    "calendar": "plugin://calendar/calendar"
+  }
+}

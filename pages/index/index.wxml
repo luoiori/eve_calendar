@@ -1,0 +1,30 @@
+<!--index.wxml-->
+<view class="container-fluid">
+    <view class="demo5">
+      
+        <calendar        
+        cell-size="30" 
+        next="{{true}}" prev="{{true}}" show-more-days="{{true}}"
+        calendar-style="demo5-calendar" 
+        header-style="demo5-header" 
+        board-style="demo5-board" 
+        days-color="{{demo5_days_style}}" 
+        weeks-type="cn"
+        binddayClick="dayClick"
+        />
+    </view>
+    <view class="demo5">
+      <label class="morning">早</label><br/>
+      <label class="noon">中</label><br/>
+      <label class="evening">晚</label>
+    </view>
+
+    <view class="demo5">
+      <label class="mtip">点击日期选择当天成为早班第一天</label>
+    </view>
+
+  <view class="container-btn">
+    <button type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}"
+  disabled="{{disabled}}" bindtap="saveConf"> 保存当前设置 </button>
+    </view>
+</view>
