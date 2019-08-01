@@ -23,20 +23,26 @@ Page({
   dayClick: function (event) {
     wx.setStorageSync("_firstDate_month", event.detail.month)
     wx.setStorageSync("_firstDate_day", event.detail.day)
-    const fisrtDate = new Date(this.data.year, event.detail.month-1, event.detail.day);
+    const fisrtDate = new Date(event.detail.year, event.detail.month-1, event.detail.day);
+    console.log("firstdate="+fisrtDate)
     let demo5_days_style = new Array;
-    const days_count = new Date(this.data.year, event.detail.month + 1, 0).getDate();
+    const days_count = new Date(event.detail.year, event.detail.month - 1, 0).getDate();
     for (let i = 1; i <= days_count; i++) {
-      const date = new Date(this.data.year, this.data.month - 1, i);
+      const date = new Date(event.detail.year, event.detail.month - 1, i);
+      console.log(date)
       var diff = (date - fisrtDate) / (1000 * 60 * 60 * 24);
       var mod = diff % 9
-      if ((mod >= 0 && mod <= 2) ||  mod<=-7) {
+      console.log(mod+"->"+(mod+9))
+      if (mod<0){
+        mod += 9
+      }
+      if (mod >= 0 && mod <= 2) {
         // 早
         demo5_days_style.push({ month: 'current', day: i, color: 'white', background: '#FFCC66' });
-      } else if ((mod >= 3 && mod <= 5) || (mod <= -4 && mod>=-6)) {
-        demo5_days_style.push({ month: 'current', day: i, color: 'white', background: '#FF6600' });
-      } else if ((mod >= 6 && mod <= 8) || (mod <= -1 && mod >= -5)) {
+      } else if (mod >= 3 && mod <= 5) {
         demo5_days_style.push({ month: 'current', day: i, color: 'white', background: '#777777' });
+      } else if (mod >= 6 && mod <= 8) {
+        demo5_days_style.push({ month: 'current', day: i, color: 'white', background: '#FF6600' });
       }
 
     }
@@ -75,103 +81,26 @@ Page({
    
     var fisrtDate = new Date(2019, _m, _d)
     
-    const days_count = new Date(this.data.year, this.data.month, 0).getDate();
-    let demo1_days_style = new Array;
-    for (let i = 1; i <= days_count; i++) {
-      if (parseInt(Math.random() * 100) > 50) {
-        demo1_days_style.push({
-          month: 'current', day: i, color: 'white', background: '#8497ee'
-        });
-      } else {
-        demo1_days_style.push({
-          month: 'current', day: i, color: 'white'
-        });
-      }
-    }
-    this.setData({
-      demo1_days_style
-    });
-
-    let demo2_days_style = new Array;
-    for (let i = 1; i <= days_count; i++) {
-      if (i == 12) {
-        demo2_days_style.push({
-          month: 'current', day: i, color: '#314580', background: '#ffed09'
-        });
-      } else if (i == 16) {
-        demo2_days_style.push({
-          month: 'current', day: i, color: 'white', background: '#30558c'
-        });
-      } else if (i == 21) {
-        demo2_days_style.push({
-          month: 'current', day: i, color: 'white', background: '#3c5281'
-        });
-      } else {
-        demo2_days_style.push({
-          month: 'current', day: i, color: 'white'
-        });
-      }
-    }
-    this.setData({
-      demo2_days_style
-    });
-
-    let demo4_days_style = new Array;
-    for (let i = 1; i <= days_count; i++) {
-      if (i == 3) {
-        demo4_days_style.push({
-          month: 'current', day: i, color: 'white', background: '#46c4f3'
-        });
-      } else if (i == 7) {
-        demo4_days_style.push({
-          month: 'current', day: i, color: 'white', background: '#ffb72b'
-        });
-      } else if (i == 12 || i == 23 || i == 24) {
-        demo4_days_style.push({
-          month: 'current', day: i, color: 'white', background: '#865fc1'
-        });
-      } else if (i == 21 || i == 22) {
-        demo4_days_style.push({
-          month: 'current', day: i, color: 'white', background: '#eb4986'
-        });
-      } else {
-        demo4_days_style.push({
-          month: 'current', day: i, color: 'white'
-        });
-      }
-    }
-    this.setData({
-      demo4_days_style
-    });
+    const days_count = new Date(this.data.year, this.data.month-1, 0).getDate();
 
     let demo5_days_style = new Array;
     for (let i = 1; i <= days_count; i++) {
       const date = new Date(this.data.year, this.data.month - 1, i);
-      if (date.getDay() == 0 || date.getDay() == 6) {
-        demo5_days_style.push({
-          month: 'current', day: i, color: '#f488cd'
-        });
-      } else {
-        demo5_days_style.push({
-          month: 'current', day: i, color: '#a18ada'
-        });
-      }
       var diff = (date - fisrtDate) / (1000 * 60 * 60 * 24);
       var mod = diff % 9
+      if (mod < 0){
+        mod = mod + 9
+      }
       if (mod >= 0 && mod <= 2){
         // 早
         demo5_days_style.push({ month: 'current', day: i, color: 'white', background: '#FFCC66' });
       } else if (mod >= 3 && mod <= 5){
-        demo5_days_style.push({ month: 'current', day: i, color: 'white', background: '#FF6600' });
-      } else if (mod >= 6 && mod <= 8) {
         demo5_days_style.push({ month: 'current', day: i, color: 'white', background: '#777777' });
+      } else if (mod >= 6 && mod <= 8) {
+        demo5_days_style.push({ month: 'current', day: i, color: 'white', background: '#FF6600' });
       }
 
     }
-    // demo5_days_style.push({ month: 'current', day: 12, color: 'white', background: '#b49eeb' });
-    // demo5_days_style.push({ month: 'current', day: 17, color: 'white', background: '#f5a8f0' });
-    // demo5_days_style.push({ month: 'current', day: 20, color: 'white', background: '#aad4f5' });
-    // demo5_days_style.push({ month: 'current', day: 25, color: 'white', background: '#84e7d0' });
 
     this.setData({
       demo5_days_style
